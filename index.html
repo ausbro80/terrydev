@@ -3,23 +3,20 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Terry | Vibe Coding Developer & Pharmacist</title>
-  <meta name="description" content="Terry. Vibe coding developer and pharmacist. Clean, fast MVPs and user-focused product flows." />
+  <title>Terry | Vibe Coding Builder & Pharmacist</title>
+  <meta name="description" content="Terry. Vibe coding builder and pharmacist. Building real products across health, games, and experiments." />
 
   <style>
     :root{
-      --bg:#070a12;
+      --bg:#060812;
       --text:#eef2ff;
       --muted:rgba(238,242,255,.72);
       --muted2:rgba(238,242,255,.56);
       --line:rgba(255,255,255,.14);
-      --glass:rgba(255,255,255,.08);
-      --glass2:rgba(255,255,255,.06);
-      --accent:rgba(125,211,252,.70);
-      --accent2:rgba(167,243,208,.60);
-      --shadow:0 18px 70px rgba(0,0,0,.45);
-      --shadow2:0 28px 90px rgba(0,0,0,.55);
-      --radius:22px;
+      --glassA:rgba(255,255,255,.10);
+      --shadowA:0 18px 70px rgba(0,0,0,.50);
+      --shadowB:0 36px 110px rgba(0,0,0,.62);
+      --radius:24px;
     }
 
     *{box-sizing:border-box}
@@ -29,395 +26,225 @@
       font-family: ui-sans-serif, system-ui, -apple-system, "Apple SD Gothic Neo", "Noto Sans KR", Segoe UI, Roboto, Helvetica, Arial;
       color:var(--text);
       background:
-        radial-gradient(1000px 650px at 12% 12%, rgba(125,211,252,.18), transparent 58%),
-        radial-gradient(900px 600px at 92% 20%, rgba(167,243,208,.14), transparent 56%),
-        radial-gradient(900px 700px at 60% 110%, rgba(125,211,252,.10), transparent 60%),
+        radial-gradient(1200px 700px at 15% 10%, rgba(125,211,252,.20), transparent 58%),
+        radial-gradient(1000px 700px at 85% 18%, rgba(167,243,208,.16), transparent 58%),
+        radial-gradient(1200px 900px at 50% 115%, rgba(168,85,247,.10), transparent 60%),
         var(--bg);
       line-height:1.55;
+      overflow-x:hidden;
     }
 
     a{color:inherit}
-    .wrap{
-      max-width:1020px;
-      margin:0 auto;
-      padding:46px 18px 88px;
+    .wrap{max-width:1080px;margin:0 auto;padding:54px 18px 96px;}
+
+    .noise{
+      position:fixed;inset:0;pointer-events:none;opacity:.07;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.45'/%3E%3C/svg%3E");
+      mix-blend-mode:overlay;
     }
 
     .glass{
-      background: linear-gradient(180deg, var(--glass), rgba(255,255,255,.03));
+      background: linear-gradient(180deg, var(--glassA), rgba(255,255,255,.05));
       border:1px solid var(--line);
-      backdrop-filter: blur(22px);
-      -webkit-backdrop-filter: blur(22px);
+      backdrop-filter: blur(26px);
+      -webkit-backdrop-filter: blur(26px);
       box-shadow:
         inset 0 1px 0 rgba(255,255,255,.35),
-        var(--shadow);
+        inset 0 -1px 0 rgba(255,255,255,.06),
+        var(--shadowA);
       border-radius: var(--radius);
+      position:relative;
+    }
+    .glass::before{
+      content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+      background:
+        radial-gradient(900px 260px at 15% 5%, rgba(255,255,255,.18), transparent 60%),
+        radial-gradient(900px 260px at 85% 0%, rgba(255,255,255,.10), transparent 65%);
+      opacity:.9;
     }
 
-    .top{
-      padding:22px;
-    }
-
-    .hero{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:18px;
-      flex-wrap:wrap;
-    }
-
-    .id{
-      display:flex;
-      align-items:center;
-      gap:16px;
-      min-width:280px;
-    }
-
+    .top{padding:24px;}
+    .hero{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;flex-wrap:wrap;position:relative;z-index:1;}
+    .id{display:flex;align-items:center;gap:16px;min-width:280px;}
     .avatar{
-      width:94px;
-      height:94px;
-      border-radius:20px;
-      overflow:hidden;
-      border:1px solid rgba(255,255,255,.18);
-      background:rgba(255,255,255,.04);
+      width:96px;height:96px;border-radius:22px;overflow:hidden;
+      border:1px solid rgba(255,255,255,.20);background:rgba(255,255,255,.05);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.22), 0 16px 55px rgba(0,0,0,.45);
       flex:0 0 auto;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.25);
     }
-    .avatar img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-    }
+    .avatar img{width:100%;height:100%;object-fit:cover;display:block;}
+    h1{margin:0;font-size:32px;letter-spacing:.2px;}
+    .headline{margin:6px 0 0;color:var(--muted);font-size:14px;max-width:640px;}
 
-    h1{
-      margin:0;
-      font-size:30px;
-      letter-spacing:.2px;
-    }
+    .right{display:flex;flex-direction:column;gap:10px;align-items:flex-end;margin-left:auto;position:relative;z-index:1;}
+    @media (max-width: 900px){.right{align-items:flex-start;width:100%;}}
 
-    .headline{
-      margin:6px 0 0;
-      color:var(--muted);
-      font-size:14px;
-      max-width:580px;
-    }
+    .lang{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;align-items:center;}
+    @media (max-width: 900px){.lang{justify-content:flex-start}}
 
-    .right{
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-      align-items:flex-end;
-      margin-left:auto;
-    }
-    @media (max-width: 900px){
-      .right{align-items:flex-start; width:100%;}
-    }
-
-    .lang{
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap;
-      justify-content:flex-end;
-      align-items:center;
-    }
-    @media (max-width: 900px){
-      .lang{justify-content:flex-start}
-    }
-
-    .pillrow{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      justify-content:flex-end;
-      align-items:center;
-    }
-    @media (max-width: 900px){
-      .pillrow{justify-content:flex-start}
-    }
+    .pillrow{display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end;align-items:center;}
+    @media (max-width: 900px){.pillrow{justify-content:flex-start}}
 
     .pill{
-      font-size:12px;
-      padding:8px 10px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.14);
-      background:rgba(255,255,255,.05);
-      color:var(--muted2);
+      font-size:12px;padding:8px 10px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.06);
+      color:var(--muted2);box-shadow: inset 0 1px 0 rgba(255,255,255,.12);
       white-space:nowrap;
     }
 
     .btn{
-      text-decoration:none;
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      padding:10px 12px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.16);
-      background:rgba(255,255,255,.05);
-      color:var(--text);
-      font-size:14px;
-      transition: transform .15s ease, background .15s ease, border-color .15s ease, box-shadow .15s ease;
-      cursor:pointer;
-      user-select:none;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.18);
+      text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;
+      padding:10px 12px;border-radius:16px;border:1px solid rgba(255,255,255,.18);
+      background:rgba(255,255,255,.06);color:var(--text);font-size:14px;cursor:pointer;user-select:none;
+      transition: transform .16s ease, background .16s ease, border-color .16s ease, box-shadow .16s ease;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.16), 0 10px 28px rgba(0,0,0,.18);
     }
     .btn:hover{
       transform: translateY(-1px);
-      background:rgba(255,255,255,.07);
-      border-color: rgba(255,255,255,.22);
+      background:rgba(255,255,255,.08);
+      border-color: rgba(255,255,255,.26);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 14px 36px rgba(0,0,0,.26);
     }
+    .btn:active{transform: translateY(0px) scale(.99);}
     .btn.primary{
       border-color: rgba(125,211,252,.55);
-      background: linear-gradient(180deg, rgba(125,211,252,.20), rgba(255,255,255,.04));
-      box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.22),
-        0 14px 45px rgba(125,211,252,.10);
+      background: linear-gradient(180deg, rgba(125,211,252,.22), rgba(255,255,255,.05));
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 16px 48px rgba(125,211,252,.12);
     }
-    .btn.small{
-      padding:8px 10px;
-      font-size:13px;
-      border-radius:13px;
-    }
+    .btn.small{padding:8px 10px;font-size:13px;border-radius:14px;}
     .btn.active{
       border-color: rgba(167,243,208,.55);
-      background: linear-gradient(180deg, rgba(167,243,208,.16), rgba(255,255,255,.04));
+      background: linear-gradient(180deg, rgba(167,243,208,.18), rgba(255,255,255,.05));
     }
 
-    .row{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      align-items:center;
-      margin-top:12px;
-    }
+    .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:12px;}
+    .hint{margin-top:10px;color:rgba(238,242,255,.58);font-size:13px;}
 
-    .hint{
-      margin-top:10px;
-      color:rgba(238,242,255,.58);
-      font-size:13px;
-    }
+    .grid{display:grid;grid-template-columns: 1.08fr .92fr;gap:14px;margin-top:18px;position:relative;z-index:1;}
+    @media (max-width: 900px){.grid{grid-template-columns:1fr}}
 
-    .grid{
-      display:grid;
-      grid-template-columns: 1.08fr .92fr;
-      gap:14px;
-      margin-top:16px;
-    }
-    @media (max-width: 900px){
-      .grid{grid-template-columns:1fr}
-    }
-
-    .section{
-      padding:18px;
-    }
-    .section.glass{
-      border-radius:18px;
-    }
-
-    .section h2{
-      margin:0 0 10px;
-      font-size:16px;
-      letter-spacing:.15px;
-    }
-    .section p{
-      margin:0;
-      color:var(--muted);
-      font-size:14px;
-    }
-    ul{
-      margin:10px 0 0;
-      padding-left:18px;
-      color:var(--muted);
-      font-size:14px;
-    }
+    .section{padding:18px;border-radius:20px;}
+    .section h2{margin:0 0 10px;font-size:16px;letter-spacing:.15px;}
+    .section p{margin:0;color:var(--muted);font-size:14px;}
+    ul{margin:10px 0 0;padding-left:18px;color:var(--muted);font-size:14px;}
     li{margin:6px 0}
 
-    .mini{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:10px;
-      margin-top:12px;
-    }
-    @media (max-width: 520px){
-      .mini{grid-template-columns:1fr}
-    }
+    .mini{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px;}
+    @media (max-width: 520px){.mini{grid-template-columns:1fr}}
     .stat{
-      border:1px solid rgba(255,255,255,.12);
-      border-radius:16px;
-      padding:12px;
-      background:rgba(255,255,255,.04);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.14);
+      border:1px solid rgba(255,255,255,.14);border-radius:18px;padding:12px;
+      background:rgba(255,255,255,.04);box-shadow: inset 0 1px 0 rgba(255,255,255,.12);
     }
-    .stat .k{
-      font-size:12px;
-      color:rgba(238,242,255,.58);
-      margin:0;
-    }
-    .stat .v{
-      margin:6px 0 0;
-      font-size:14px;
-      color:var(--text);
-      font-weight:600;
+    .stat .k{font-size:12px;color:rgba(238,242,255,.58);margin:0;}
+    .stat .v{margin:6px 0 0;font-size:14px;color:var(--text);font-weight:650;letter-spacing:.1px;}
+
+    .divider{height:1px;background:rgba(255,255,255,.10);margin:14px 0;}
+
+    .anchorbar{
+      margin-top:16px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;
+      position:relative;z-index:1;
     }
 
-    .divider{
-      height:1px;
-      background:rgba(255,255,255,.10);
-      margin:14px 0;
+    .block{margin-top:16px;padding:18px;position:relative;z-index:1;}
+    .blockhead{
+      display:flex;align-items:flex-end;justify-content:space-between;gap:12px;flex-wrap:wrap;
+      margin-bottom:10px;
     }
-
-    .projects{
-      margin-top:14px;
-      padding:18px;
-    }
-    .projects h2{
-      margin:0 0 10px;
-      font-size:16px;
-      letter-spacing:.15px;
-    }
+    .blocktitle{margin:0;font-size:16px;letter-spacing:.15px;}
+    .blocksub{margin:0;color:rgba(238,242,255,.58);font-size:13px;}
 
     .project-grid{
       display:grid;
-      grid-template-columns:repeat(auto-fit, minmax(255px, 1fr));
+      grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
       gap:14px;
       margin-top:12px;
     }
 
     .card{
-      border-radius:22px;
+      border-radius:24px;
       overflow:hidden;
+      transform: translateZ(0);
       transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
     }
     .card:hover{
-      transform: translateY(-4px) scale(1.01);
-      box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.45),
-        var(--shadow2);
+      transform: translateY(-6px) scale(1.01);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.40), var(--shadowB);
       border-color: rgba(125,211,252,.30);
     }
 
     .shot{
-      position:relative;
-      height:180px;
-      overflow:hidden;
+      position:relative;height:186px;overflow:hidden;
       background:rgba(255,255,255,.04);
       border-bottom:1px solid rgba(255,255,255,.10);
       cursor:pointer;
     }
     .shot img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-      transform: scale(1.01);
+      width:100%;height:100%;object-fit:cover;display:block;
+      transform: scale(1.02);
       transition: transform .22s ease, filter .22s ease;
-      filter:saturate(1.05) contrast(1.02);
+      filter:saturate(1.06) contrast(1.02);
     }
     .card:hover .shot img{
-      transform: scale(1.045);
-      filter:saturate(1.08) contrast(1.03);
+      transform: scale(1.07);
+      filter:saturate(1.10) contrast(1.03);
     }
     .overlay{
-      position:absolute;
-      inset:0;
+      position:absolute;inset:0;pointer-events:none;
       background:
-        linear-gradient(to top, rgba(0,0,0,.42), transparent 62%),
-        radial-gradient(600px 220px at 20% 10%, rgba(125,211,252,.18), transparent 60%);
-      pointer-events:none;
+        linear-gradient(to top, rgba(0,0,0,.46), transparent 62%),
+        radial-gradient(620px 240px at 22% 12%, rgba(125,211,252,.20), transparent 60%),
+        radial-gradient(620px 240px at 78% 10%, rgba(167,243,208,.14), transparent 60%);
     }
-    .shot .badge{
-      position:absolute;
-      left:12px;
-      bottom:12px;
-      font-size:12px;
-      padding:7px 10px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.16);
+    .badge{
+      position:absolute;left:12px;bottom:12px;
+      font-size:12px;padding:7px 10px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.18);
       background:rgba(0,0,0,.28);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      color:rgba(238,242,255,.86);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color:rgba(238,242,255,.88);
       box-shadow: inset 0 1px 0 rgba(255,255,255,.12);
     }
 
-    .cbody{
-      padding:14px 14px 12px;
-    }
-    .title{
-      margin:0;
-      font-size:15px;
-      letter-spacing:.1px;
-    }
-    .desc{
-      margin:6px 0 10px;
-      color:var(--muted);
-      font-size:13px;
-    }
-    .tags{
-      display:flex;
-      gap:8px;
-      flex-wrap:wrap;
-      margin:0 0 10px;
-    }
+    .cbody{padding:14px 14px 12px;}
+    .title{margin:0;font-size:15px;letter-spacing:.1px;}
+    .desc{margin:6px 0 10px;color:var(--muted);font-size:13px;}
+    .tags{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 10px;}
     .tag{
-      font-size:12px;
-      padding:6px 9px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.12);
+      font-size:12px;padding:6px 9px;border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
       background:rgba(255,255,255,.04);
       color:rgba(238,242,255,.62);
     }
 
-    .foot{
-      margin-top:12px;
-      color:rgba(238,242,255,.52);
-      font-size:12px;
-      padding:0 4px;
-    }
+    .foot{margin-top:14px;color:rgba(238,242,255,.52);font-size:12px;padding:0 4px;}
 
     .lightbox{
-      position:fixed;
-      inset:0;
-      background:rgba(0,0,0,.72);
-      display:none;
-      align-items:center;
-      justify-content:center;
-      padding:18px;
-      z-index:999;
+      position:fixed;inset:0;background:rgba(0,0,0,.74);
+      display:none;align-items:center;justify-content:center;padding:18px;z-index:999;
     }
     .lightbox.open{display:flex}
     .lightbox .box{
-      width:min(980px, 100%);
-      border:1px solid rgba(255,255,255,.16);
-      border-radius:22px;
+      width:min(1020px, 100%);
+      border:1px solid rgba(255,255,255,.18);
+      border-radius:24px;
       overflow:hidden;
-      background:rgba(0,0,0,.30);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      box-shadow: 0 22px 90px rgba(0,0,0,.65);
+      background:rgba(255,255,255,.06);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: 0 26px 110px rgba(0,0,0,.72);
     }
-    .lightbox img{
-      width:100%;
-      height:auto;
-      display:block;
-    }
+    .lightbox img{width:100%;height:auto;display:block;}
     .lightbox .bar{
-      display:flex;
-      justify-content:space-between;
-      gap:10px;
-      align-items:center;
-      padding:10px 12px;
-      border-top:1px solid rgba(255,255,255,.10);
-      background:rgba(255,255,255,.04);
-      color:rgba(238,242,255,.75);
-      font-size:12px;
+      display:flex;justify-content:space-between;gap:10px;align-items:center;
+      padding:10px 12px;border-top:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.04);color:rgba(238,242,255,.75);font-size:12px;
     }
     .xbtn{
-      border:1px solid rgba(255,255,255,.16);
+      border:1px solid rgba(255,255,255,.18);
       background:rgba(255,255,255,.06);
       color:var(--text);
-      border-radius:12px;
+      border-radius:14px;
       padding:8px 10px;
       cursor:pointer;
       box-shadow: inset 0 1px 0 rgba(255,255,255,.12);
@@ -426,23 +253,24 @@
 </head>
 
 <body>
+  <div class="noise"></div>
+
   <main class="wrap">
-    <section class="glass top">
+    <section class="glass top" id="top">
       <div class="hero">
         <div class="id">
           <div class="avatar">
             <img src="profile.jpg" alt="Terry profile photo" />
           </div>
-
           <div>
             <h1 data-i18n="name">Terry</h1>
             <p class="headline" data-i18n="headline">
-              Vibe coding developer and pharmacist. I build fast, test with real users, and iterate to ship better products.
+              Vibe coding builder and pharmacist. Building real products across health, games, and experiments.
             </p>
 
             <div class="row">
               <a class="btn primary" data-i18n="ctaPrimary"
-                 href="mailto:ausbro80@gmail.com?subject=Collaboration%20with%20Terry&body=Hi%20Terry%2C%0A%0AI%20want%20to%20collaborate%20on%20...%0A%0AProject%20goal%3A%0ATimeline%3A%0ALinks%3A%0A">
+                 href="mailto:ausbro80@gmail.com?subject=Collaboration%20with%20Terry&body=Hi%20Terry%2C%0A%0AIdea%3A%0ATarget%20users%3A%0ATimeline%3A%0AReference%20links%3A%0A">
                 Collaborate
               </a>
               <a class="btn" href="https://x.com/ausbro80" target="_blank" rel="noreferrer">X</a>
@@ -450,7 +278,7 @@
             </div>
 
             <div class="hint" data-i18n="collabHint">
-              Best for founders, creators, and teams who want a working MVP quickly.
+              If you have a rough idea, I can help ship a working first version quickly.
             </div>
           </div>
         </div>
@@ -464,16 +292,24 @@
           <div class="pillrow">
             <span class="pill" data-i18n="pill1">Rapid Prototyping</span>
             <span class="pill" data-i18n="pill2">Product Builder</span>
-            <span class="pill" data-i18n="pill3">Health and Consumer Apps</span>
+            <span class="pill" data-i18n="pill3">Health, Games, Experiments</span>
           </div>
         </div>
+      </div>
+
+      <div class="anchorbar">
+        <a class="btn" href="#featured" data-i18n="navFeatured">Featured</a>
+        <a class="btn" href="#health" data-i18n="navHealth">Health Tech</a>
+        <a class="btn" href="#games" data-i18n="navGames">Games</a>
+        <a class="btn" href="#experiments" data-i18n="navExperiments">Experiments</a>
+        <a class="btn" href="#work" data-i18n="navWork">Work With Me</a>
       </div>
 
       <div class="grid">
         <section class="glass section">
           <h2 data-i18n="aboutTitle">About</h2>
           <p data-i18n="aboutBody">
-            I combine pharmacy domain knowledge with software building. When an idea comes up, I turn it into a working product quickly, then improve through feedback cycles.
+            I combine pharmacy domain knowledge with product building. I prototype quickly, test with real users, and iterate until it feels right.
           </p>
 
           <div class="mini">
@@ -487,7 +323,7 @@
             </div>
             <div class="stat">
               <p class="k" data-i18n="stat3k">Focus</p>
-              <p class="v" data-i18n="stat3v">Health, consumer UX</p>
+              <p class="v" data-i18n="stat3v">Health and consumer UX</p>
             </div>
           </div>
 
@@ -495,124 +331,221 @@
 
           <h2 data-i18n="collabTitle">Collaboration</h2>
           <ul>
-            <li data-i18n="collab1">MVP and prototype build for new product ideas</li>
-            <li data-i18n="collab2">UX polish for mobile-first flows</li>
+            <li data-i18n="collab1">Working MVPs with clean user flows</li>
+            <li data-i18n="collab2">Mobile-first UX polish</li>
             <li data-i18n="collab3">Health and wellness product concepts with pharmacy perspective</li>
           </ul>
-
-          <div class="row">
-            <a class="btn primary" data-i18n="ctaSecondary"
-               href="mailto:ausbro80@gmail.com?subject=Project%20Request&body=Hi%20Terry%2C%0A%0AWhat%20I%20want%3A%0ATarget%20users%3A%0ATimeline%3A%0ABudget%3A%0ALinks%3A%0A">
-              Start a project
-            </a>
-            <a class="btn" data-i18n="ctaTertiary"
-               href="mailto:ausbro80@gmail.com?subject=Quick%20Question&body=Hi%20Terry%2C%0A%0AQuestion%3A%0A">
-              Quick question
-            </a>
-          </div>
         </section>
 
         <section class="glass section">
           <h2 data-i18n="whatTitle">What I build</h2>
           <ul>
-            <li data-i18n="what1">Working web apps that show the full user flow</li>
-            <li data-i18n="what2">Interactive prototypes for validating product direction</li>
-            <li data-i18n="what3">Lean builds that are easy to improve every day</li>
+            <li data-i18n="what1">Real screens and real flows, not just pretty mockups</li>
+            <li data-i18n="what2">Interactive prototypes for fast validation</li>
+            <li data-i18n="what3">Small releases that improve every day</li>
           </ul>
 
           <div class="divider"></div>
 
-          <h2 data-i18n="credTitle">Why teams work with me</h2>
+          <h2 data-i18n="nowTitle">Currently building</h2>
           <ul>
-            <li data-i18n="cred1">Fast execution with clear communication</li>
-            <li data-i18n="cred2">Strong product sense for user experience</li>
-            <li data-i18n="cred3">Domain insight from being a pharmacist</li>
+            <li data-i18n="now1">Hand-tracking and AR interaction experiments</li>
+            <li data-i18n="now2">Health scanning workflows with better UX</li>
+            <li data-i18n="now3">Lightweight game prototypes with vibe coding</li>
           </ul>
-
-          <p class="hint" data-i18n="note">
-            If you have a rough idea, I can help turn it into a working first version.
-          </p>
         </section>
       </div>
+    </section>
 
-      <section class="glass projects">
-        <h2 data-i18n="projectsTitle">Portfolio</h2>
-
-        <div class="project-grid">
-          <article class="glass card">
-            <div class="shot" data-shot="k-nutri-scan.png" data-cap="K-Nutri Scan">
-              <img src="k-nutri-scan.png" alt="K-Nutri Scan screenshot">
-              <div class="overlay"></div>
-              <div class="badge" data-i18n="p1label">Health, Web App</div>
-            </div>
-            <div class="cbody">
-              <h3 class="title">K-Nutri Scan</h3>
-              <p class="desc" data-i18n="p1desc">
-                A health-oriented web app that helps users review product information with a clear, user-friendly flow.
-              </p>
-              <div class="tags">
-                <span class="tag">Web</span>
-                <span class="tag" data-i18n="tagUx">UX</span>
-                <span class="tag" data-i18n="tagHealth">Health</span>
-              </div>
-              <div class="row">
-                <a class="btn primary" href="https://k-nutri-scan.vercel.app/" target="_blank" rel="noreferrer" data-i18n="open">Open</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="glass card">
-            <div class="shot" data-shot="bubble-pinch.png" data-cap="Bubble Pinch">
-              <img src="bubble-pinch.png" alt="Bubble Pinch screenshot">
-              <div class="overlay"></div>
-              <div class="badge" data-i18n="p2label">Interaction, Prototype</div>
-            </div>
-            <div class="cbody">
-              <h3 class="title">Bubble Pinch</h3>
-              <p class="desc" data-i18n="p2desc">
-                An interaction-focused prototype exploring playful mobile input and quick iteration.
-              </p>
-              <div class="tags">
-                <span class="tag" data-i18n="tagProto">Prototype</span>
-                <span class="tag" data-i18n="tagMobile">Mobile</span>
-                <span class="tag" data-i18n="tagGame">Game</span>
-              </div>
-              <div class="row">
-                <a class="btn primary" href="https://bubble-pinch.vercel.app/" target="_blank" rel="noreferrer" data-i18n="open">Open</a>
-              </div>
-            </div>
-          </article>
-
-          <article class="glass card">
-            <div class="shot" data-shot="placeholder.png" data-cap="Let’s build">
-              <img src="placeholder.png" alt="Preview placeholder">
-              <div class="overlay"></div>
-              <div class="badge" data-i18n="p3label">Work with me</div>
-            </div>
-            <div class="cbody">
-              <h3 class="title" data-i18n="p3title">Let’s build your next MVP</h3>
-              <p class="desc" data-i18n="p3desc">
-                Share your idea, goal, and timeline. I will propose a short build plan and ship a working first version.
-              </p>
-              <div class="tags">
-                <span class="tag" data-i18n="tagPlan">Plan</span>
-                <span class="tag" data-i18n="tagShip">Ship</span>
-                <span class="tag" data-i18n="tagIterate">Iterate</span>
-              </div>
-              <div class="row">
-                <a class="btn primary" data-i18n="ctaPrimary"
-                   href="mailto:ausbro80@gmail.com?subject=Build%20an%20MVP&body=Hi%20Terry%2C%0A%0AIdea%3A%0ATarget%20users%3A%0ATimeline%3A%0AReference%20links%3A%0A">
-                  Collaborate
-                </a>
-              </div>
-            </div>
-          </article>
+    <section class="glass block" id="featured">
+      <div class="blockhead">
+        <div>
+          <h2 class="blocktitle" data-i18n="featuredTitle">Featured Products</h2>
+          <p class="blocksub" data-i18n="featuredSub">The best representation of what I ship.</p>
         </div>
+        <a class="btn" href="#top" data-i18n="backTop">Back to top</a>
+      </div>
 
-        <div class="foot">
-          © <span id="y"></span> <span data-i18n="name">Terry</span>
+      <div class="project-grid">
+        <article class="glass card">
+          <div class="shot" data-shot="k-nutri-scan.png" data-cap="K-Nutri Scan">
+            <img src="k-nutri-scan.png" alt="K-Nutri Scan screenshot">
+            <div class="overlay"></div>
+            <div class="badge" data-i18n="badgeHealth">Health Tech</div>
+          </div>
+          <div class="cbody">
+            <h3 class="title">K-Nutri Scan</h3>
+            <p class="desc" data-i18n="knDesc">Health product scan and review app with clear, user-friendly flow.</p>
+            <div class="tags">
+              <span class="tag">Web</span>
+              <span class="tag" data-i18n="tagUx">UX</span>
+              <span class="tag" data-i18n="tagHealth">Health</span>
+            </div>
+            <div class="row">
+              <a class="btn primary" href="https://k-nutri-scan.vercel.app/" target="_blank" rel="noreferrer" data-i18n="open">Open</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="glass card">
+          <div class="shot" data-shot="bubble-pinch.png" data-cap="Bubble Pinch">
+            <img src="bubble-pinch.png" alt="Bubble Pinch screenshot">
+            <div class="overlay"></div>
+            <div class="badge" data-i18n="badgeGame">Games</div>
+          </div>
+          <div class="cbody">
+            <h3 class="title">Bubble Pinch</h3>
+            <p class="desc" data-i18n="bpDesc">Interactive prototype exploring playful mobile input and rapid iteration.</p>
+            <div class="tags">
+              <span class="tag" data-i18n="tagProto">Prototype</span>
+              <span class="tag" data-i18n="tagMobile">Mobile</span>
+              <span class="tag" data-i18n="tagGame">Game</span>
+            </div>
+            <div class="row">
+              <a class="btn primary" href="https://bubble-pinch.vercel.app/" target="_blank" rel="noreferrer" data-i18n="open">Open</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="glass block" id="health">
+      <div class="blockhead">
+        <div>
+          <h2 class="blocktitle" data-i18n="healthTitle">Health Tech</h2>
+          <p class="blocksub" data-i18n="healthSub">Pharmacy perspective plus product building.</p>
         </div>
-      </section>
+        <a class="btn" href="#top" data-i18n="backTop">Back to top</a>
+      </div>
+
+      <div class="project-grid">
+        <article class="glass card">
+          <div class="shot" data-shot="k-nutri-scan.png" data-cap="K-Nutri Scan">
+            <img src="k-nutri-scan.png" alt="K-Nutri Scan screenshot">
+            <div class="overlay"></div>
+            <div class="badge" data-i18n="badgeHealth">Health Tech</div>
+          </div>
+          <div class="cbody">
+            <h3 class="title">K-Nutri Scan</h3>
+            <p class="desc" data-i18n="knDesc2">Focused on clarity, trust, and a smooth scanning-to-insight flow.</p>
+            <div class="tags">
+              <span class="tag" data-i18n="tagHealth">Health</span>
+              <span class="tag" data-i18n="tagFlow">Flow</span>
+              <span class="tag" data-i18n="tagClarity">Clarity</span>
+            </div>
+            <div class="row">
+              <a class="btn primary" href="https://k-nutri-scan.vercel.app/" target="_blank" rel="noreferrer" data-i18n="open">Open</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="glass block" id="games">
+      <div class="blockhead">
+        <div>
+          <h2 class="blocktitle" data-i18n="gamesTitle">Games and Interactive</h2>
+          <p class="blocksub" data-i18n="gamesSub">Fast, playful prototypes with tight feedback loops.</p>
+        </div>
+        <a class="btn" href="#top" data-i18n="backTop">Back to top</a>
+      </div>
+
+      <div class="project-grid">
+        <article class="glass card">
+          <div class="shot" data-shot="bubble-pinch.png" data-cap="Bubble Pinch">
+            <img src="bubble-pinch.png" alt="Bubble Pinch screenshot">
+            <div class="overlay"></div>
+            <div class="badge" data-i18n="badgeGame">Games</div>
+          </div>
+          <div class="cbody">
+            <h3 class="title">Bubble Pinch</h3>
+            <p class="desc" data-i18n="bpDesc2">Designed to feel good on mobile with responsive interaction.</p>
+            <div class="tags">
+              <span class="tag" data-i18n="tagMobile">Mobile</span>
+              <span class="tag" data-i18n="tagInteraction">Interaction</span>
+              <span class="tag" data-i18n="tagIteration">Iteration</span>
+            </div>
+            <div class="row">
+              <a class="btn primary" href="https://bubble-pinch.vercel.app/" target="_blank" rel="noreferrer" data-i18n="open">Open</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="glass block" id="experiments">
+      <div class="blockhead">
+        <div>
+          <h2 class="blocktitle" data-i18n="expTitle">Experiments</h2>
+          <p class="blocksub" data-i18n="expSub">Ongoing tests and prototypes.</p>
+        </div>
+        <a class="btn" href="#top" data-i18n="backTop">Back to top</a>
+      </div>
+
+      <div class="project-grid">
+        <article class="glass card">
+          <div class="shot" data-shot="exp-handtracking.png" data-cap="Hand Tracking (add screenshot)">
+            <img src="exp-handtracking.png" alt="Hand tracking experiment screenshot">
+            <div class="overlay"></div>
+            <div class="badge" data-i18n="badgeExp">Experiment</div>
+          </div>
+          <div class="cbody">
+            <h3 class="title" data-i18n="exp1Title">Hand Tracking</h3>
+            <p class="desc" data-i18n="exp1Desc">Exploring hand-based input and camera alignment for more natural interaction.</p>
+            <div class="tags">
+              <span class="tag" data-i18n="tagAr">AR</span>
+              <span class="tag" data-i18n="tagCV">CV</span>
+              <span class="tag" data-i18n="tagPrototype">Prototype</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="glass card">
+          <div class="shot" data-shot="exp-ar-character.png" data-cap="AR Character (add screenshot)">
+            <img src="exp-ar-character.png" alt="AR character experiment screenshot">
+            <div class="overlay"></div>
+            <div class="badge" data-i18n="badgeExp">Experiment</div>
+          </div>
+          <div class="cbody">
+            <h3 class="title" data-i18n="exp2Title">AR Character</h3>
+            <p class="desc" data-i18n="exp2Desc">Summoning a character in AR with voice commands and simple physical interaction.</p>
+            <div class="tags">
+              <span class="tag" data-i18n="tagAr">AR</span>
+              <span class="tag" data-i18n="tagVoice">Voice</span>
+              <span class="tag" data-i18n="tagInteraction">Interaction</span>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <p class="hint" data-i18n="expHint" style="position:relative;z-index:1;margin-top:12px;">
+        Add screenshots named exp-handtracking.png and exp-ar-character.png to show these cards properly.
+      </p>
+    </section>
+
+    <section class="glass block" id="work">
+      <div class="blockhead">
+        <div>
+          <h2 class="blocktitle" data-i18n="workTitle">Work With Me</h2>
+          <p class="blocksub" data-i18n="workSub">Send a quick brief. I respond with a short build plan.</p>
+        </div>
+        <a class="btn" href="#top" data-i18n="backTop">Back to top</a>
+      </div>
+
+      <div class="row" style="position:relative;z-index:1;">
+        <a class="btn primary" data-i18n="workCta1"
+           href="mailto:ausbro80@gmail.com?subject=Build%20an%20MVP&body=Hi%20Terry%2C%0A%0AIdea%3A%0ATarget%20users%3A%0ATimeline%3A%0ABudget%3A%0ALinks%3A%0A">
+          Start a project
+        </a>
+        <a class="btn" data-i18n="workCta2"
+           href="mailto:ausbro80@gmail.com?subject=Quick%20Question&body=Hi%20Terry%2C%0A%0AQuestion%3A%0A">
+          Quick question
+        </a>
+      </div>
+
+      <div class="foot" style="position:relative;z-index:1;margin-top:14px;">
+        © <span id="y"></span> <span data-i18n="name">Terry</span>
+      </div>
     </section>
   </main>
 
@@ -632,122 +565,184 @@
     const dict = {
       en: {
         name: "Terry",
-        headline: "Vibe coding developer and pharmacist. I build fast, test with real users, and iterate to ship better products.",
-        collabHint: "Best for founders, creators, and teams who want a working MVP quickly.",
+        headline: "Vibe coding builder and pharmacist. Building real products across health, games, and experiments.",
+        collabHint: "If you have a rough idea, I can help ship a working first version quickly.",
 
         pill1: "Rapid Prototyping",
         pill2: "Product Builder",
-        pill3: "Health and Consumer Apps",
+        pill3: "Health, Games, Experiments",
+
+        navFeatured: "Featured",
+        navHealth: "Health Tech",
+        navGames: "Games",
+        navExperiments: "Experiments",
+        navWork: "Work With Me",
+        backTop: "Back to top",
 
         aboutTitle: "About",
-        aboutBody: "I combine pharmacy domain knowledge with software building. When an idea comes up, I turn it into a working product quickly, then improve through feedback cycles.",
+        aboutBody: "I combine pharmacy domain knowledge with product building. I prototype quickly, test with real users, and iterate until it feels right.",
 
         stat1k: "Approach",
         stat1v: "Build, test, iterate",
         stat2k: "Strength",
         stat2v: "Fast MVP shipping",
         stat3k: "Focus",
-        stat3v: "Health, consumer UX",
+        stat3v: "Health and consumer UX",
 
         collabTitle: "Collaboration",
-        collab1: "MVP and prototype build for new product ideas",
-        collab2: "UX polish for mobile-first flows",
+        collab1: "Working MVPs with clean user flows",
+        collab2: "Mobile-first UX polish",
         collab3: "Health and wellness product concepts with pharmacy perspective",
 
-        ctaPrimary: "Collaborate",
-        ctaSecondary: "Start a project",
-        ctaTertiary: "Quick question",
-
         whatTitle: "What I build",
-        what1: "Working web apps that show the full user flow",
-        what2: "Interactive prototypes for validating product direction",
-        what3: "Lean builds that are easy to improve every day",
+        what1: "Real screens and real flows, not just pretty mockups",
+        what2: "Interactive prototypes for fast validation",
+        what3: "Small releases that improve every day",
 
-        credTitle: "Why teams work with me",
-        cred1: "Fast execution with clear communication",
-        cred2: "Strong product sense for user experience",
-        cred3: "Domain insight from being a pharmacist",
-        note: "If you have a rough idea, I can help turn it into a working first version.",
+        nowTitle: "Currently building",
+        now1: "Hand-tracking and AR interaction experiments",
+        now2: "Health scanning workflows with better UX",
+        now3: "Lightweight game prototypes with vibe coding",
 
-        projectsTitle: "Portfolio",
-        p1label: "Health, Web App",
-        p1desc: "A health-oriented web app that helps users review product information with a clear, user-friendly flow.",
-        p2label: "Interaction, Prototype",
-        p2desc: "An interaction-focused prototype exploring playful mobile input and quick iteration.",
-        p3label: "Work with me",
-        p3title: "Let’s build your next MVP",
-        p3desc: "Share your idea, goal, and timeline. I will propose a short build plan and ship a working first version.",
+        featuredTitle: "Featured Products",
+        featuredSub: "The best representation of what I ship.",
+
+        healthTitle: "Health Tech",
+        healthSub: "Pharmacy perspective plus product building.",
+
+        gamesTitle: "Games and Interactive",
+        gamesSub: "Fast, playful prototypes with tight feedback loops.",
+
+        expTitle: "Experiments",
+        expSub: "Ongoing tests and prototypes.",
+        expHint: "Add screenshots named exp-handtracking.png and exp-ar-character.png to show these cards properly.",
+
+        workTitle: "Work With Me",
+        workSub: "Send a quick brief. I respond with a short build plan.",
+        workCta1: "Start a project",
+        workCta2: "Quick question",
+
+        badgeHealth: "Health Tech",
+        badgeGame: "Games",
+        badgeExp: "Experiment",
+
+        knDesc: "Health product scan and review app with clear, user-friendly flow.",
+        bpDesc: "Interactive prototype exploring playful mobile input and rapid iteration.",
+        knDesc2: "Focused on clarity, trust, and a smooth scanning-to-insight flow.",
+        bpDesc2: "Designed to feel good on mobile with responsive interaction.",
+
+        exp1Title: "Hand Tracking",
+        exp1Desc: "Exploring hand-based input and camera alignment for more natural interaction.",
+        exp2Title: "AR Character",
+        exp2Desc: "Summoning a character in AR with voice commands and simple physical interaction.",
 
         tagUx: "UX",
         tagHealth: "Health",
         tagProto: "Prototype",
         tagMobile: "Mobile",
         tagGame: "Game",
-        tagPlan: "Plan",
-        tagShip: "Ship",
-        tagIterate: "Iterate",
+        tagFlow: "Flow",
+        tagClarity: "Clarity",
+        tagInteraction: "Interaction",
+        tagIteration: "Iteration",
+        tagAr: "AR",
+        tagCV: "CV",
+        tagPrototype: "Prototype",
+        tagVoice: "Voice",
 
-        open: "Open"
+        open: "Open",
+        ctaPrimary: "Collaborate"
       },
 
       kr: {
         name: "Terry",
-        headline: "바이브 코딩 개발자이자 약사입니다. 빠르게 만들고, 실제 사용자 기준으로 검증하고, 개선을 반복합니다.",
-        collabHint: "아이디어를 빠르게 MVP로 만들고 싶은 팀, 창업자, 크리에이터에게 잘 맞습니다.",
+        headline: "바이브 코딩 빌더이자 약사입니다. 헬스, 게임, 실험 프로젝트를 실제 제품으로 빠르게 만듭니다.",
+        collabHint: "아이디어가 거칠어도 괜찮습니다. 동작하는 첫 버전을 빠르게 만들 수 있습니다.",
 
         pill1: "빠른 프로토타이핑",
         pill2: "제품 빌더",
-        pill3: "헬스와 소비자 앱",
+        pill3: "헬스, 게임, 실험",
+
+        navFeatured: "대표작",
+        navHealth: "헬스 테크",
+        navGames: "게임",
+        navExperiments: "실험",
+        navWork: "협업",
+        backTop: "상단으로",
 
         aboutTitle: "소개",
-        aboutBody: "약학 도메인 지식과 개발을 함께 씁니다. 아이디어가 나오면 빠르게 동작하는 버전을 만들고, 피드백 사이클로 개선합니다.",
+        aboutBody: "약학 도메인 지식과 제품 제작을 함께 씁니다. 빠르게 만들고 실제 사용자 기준으로 검증한 뒤 개선을 반복합니다.",
 
         stat1k: "작업 방식",
         stat1v: "제작, 검증, 개선",
         stat2k: "강점",
         stat2v: "빠른 MVP 제작",
         stat3k: "포커스",
-        stat3v: "헬스, 소비자 UX",
+        stat3v: "헬스와 소비자 UX",
 
         collabTitle: "협업",
-        collab1: "새 제품 아이디어의 MVP와 프로토타입 제작",
-        collab2: "모바일 우선 흐름의 UX 개선",
-        collab3: "약사 관점이 필요한 헬스 관련 제품 기획",
-
-        ctaPrimary: "협업 제안",
-        ctaSecondary: "프로젝트 시작",
-        ctaTertiary: "간단 문의",
+        collab1: "유저 흐름이 깔끔한 MVP 제작",
+        collab2: "모바일 우선 UX 개선",
+        collab3: "약사 관점이 필요한 헬스 제품 기획",
 
         whatTitle: "만드는 것",
-        what1: "유저 흐름이 한 번에 보이는 웹 앱",
+        what1: "보기 좋은 데모보다 실제 쓰이는 화면과 흐름",
         what2: "방향 검증을 위한 인터랙티브 프로토타입",
-        what3: "매일 개선하기 쉬운 가벼운 빌드",
+        what3: "매일 개선하기 쉬운 가벼운 릴리즈",
 
-        credTitle: "함께 일하면 좋은 이유",
-        cred1: "속도 있는 실행과 명확한 소통",
-        cred2: "사용자 경험 중심의 제품 감각",
-        cred3: "약사로서의 도메인 인사이트",
-        note: "아이디어가 거칠어도 괜찮습니다. 첫 버전을 빠르게 함께 만들 수 있습니다.",
+        nowTitle: "진행 중",
+        now1: "손 인식과 AR 인터랙션 실험",
+        now2: "더 나은 UX의 헬스 스캔 플로우",
+        now3: "바이브 코딩 기반 게임 프로토타입",
 
-        projectsTitle: "포트폴리오",
-        p1label: "헬스, 웹 앱",
-        p1desc: "제품 정보를 사용자 관점에서 보기 쉽게 정리하고, 흐름을 매끄럽게 구성한 헬스 웹 앱.",
-        p2label: "인터랙션, 프로토타입",
-        p2desc: "모바일 입력의 손맛을 빠르게 실험하는 프로젝트. 짧은 사이클로 개선하는 방식에 집중.",
-        p3label: "협업",
-        p3title: "다음 MVP를 같이 만듭니다",
-        p3desc: "아이디어, 목표, 일정만 공유해 주세요. 짧은 빌드 플랜을 제안하고, 동작하는 첫 버전을 만듭니다.",
+        featuredTitle: "대표 프로젝트",
+        featuredSub: "지금 가장 자신 있게 보여줄 수 있는 결과물입니다.",
+
+        healthTitle: "헬스 테크",
+        healthSub: "약사 관점과 제품 제작을 함께 합니다.",
+
+        gamesTitle: "게임과 인터랙션",
+        gamesSub: "짧은 피드백 루프로 빠르게 개선합니다.",
+
+        expTitle: "실험",
+        expSub: "진행 중인 테스트와 프로토타입.",
+        expHint: "exp-handtracking.png, exp-ar-character.png 파일을 올리면 카드가 정상적으로 보입니다.",
+
+        workTitle: "협업",
+        workSub: "간단한 브리프를 보내주면 짧은 빌드 플랜으로 답합니다.",
+        workCta1: "프로젝트 시작",
+        workCta2: "간단 문의",
+
+        badgeHealth: "헬스 테크",
+        badgeGame: "게임",
+        badgeExp: "실험",
+
+        knDesc: "건강 제품을 스캔하고 정리해주는 앱. 흐름을 최대한 직관적으로 구성했습니다.",
+        bpDesc: "모바일 입력의 손맛을 빠르게 실험하는 인터랙션 프로토타입.",
+        knDesc2: "신뢰와 명확함, 스캔에서 인사이트까지의 흐름에 집중했습니다.",
+        bpDesc2: "모바일에서 반응이 빠르고 감각적인 인터랙션을 목표로 했습니다.",
+
+        exp1Title: "손 인식",
+        exp1Desc: "손 기반 입력과 카메라 정렬을 개선해 자연스러운 조작을 만드는 실험.",
+        exp2Title: "AR 캐릭터",
+        exp2Desc: "AR에서 캐릭터 소환 후 음성 명령과 간단한 물리 상호작용을 실험.",
 
         tagUx: "UX",
         tagHealth: "헬스",
         tagProto: "프로토타입",
         tagMobile: "모바일",
         tagGame: "게임",
-        tagPlan: "기획",
-        tagShip: "제작",
-        tagIterate: "개선",
+        tagFlow: "흐름",
+        tagClarity: "명확함",
+        tagInteraction: "인터랙션",
+        tagIteration: "개선",
+        tagAr: "AR",
+        tagCV: "비전",
+        tagPrototype: "프로토타입",
+        tagVoice: "음성",
 
-        open: "열기"
+        open: "열기",
+        ctaPrimary: "협업 제안"
       }
     };
 
@@ -774,7 +769,6 @@
 
     document.getElementById("btn-en").addEventListener("click", ()=>setLang("en"));
     document.getElementById("btn-kr").addEventListener("click", ()=>setLang("kr"));
-
     setLang("en");
 
     const lightbox = document.getElementById("lightbox");
