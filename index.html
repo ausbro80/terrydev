@@ -465,6 +465,18 @@
     }
 
     .sr{position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden}
+
+    /* Collapsible grids */
+    .collapsed .card:nth-child(n+2){
+      display:none;
+    }
+    .moreRow{
+      margin-top:10px;
+      display:flex;
+      justify-content:flex-end;
+      position:relative;
+      z-index:1;
+    }
   </style>
 </head>
 
@@ -577,7 +589,7 @@
         <a class="topLink" href="#top" data-i18n="backTop">Back to top</a>
       </div>
 
-      <div class="gridCards">
+      <div class="gridCards" id="grid-featured">
         <article class="card">
           <div class="shot" data-shot="k-nutri-scan.png" data-cap="K-Nutri Scan">
             <img src="k-nutri-scan.png" alt="K-Nutri Scan screenshot" />
@@ -652,7 +664,7 @@
         <a class="topLink" href="#top" data-i18n="backTop">Back to top</a>
       </div>
 
-      <div class="gridCards">
+      <div class="gridCards collapsed" id="grid-health">
         <article class="card">
           <div class="shot" data-shot="k-nutri-scan.png" data-cap="K-Nutri Scan">
             <img src="k-nutri-scan.png" alt="K-Nutri Scan screenshot" />
@@ -673,6 +685,10 @@
           </div>
         </article>
       </div>
+
+      <div class="moreRow">
+        <button class="btn small" type="button" data-toggle="grid-health" data-i18n="more">More</button>
+      </div>
     </section>
 
     <section class="glass section" id="games">
@@ -684,7 +700,7 @@
         <a class="topLink" href="#top" data-i18n="backTop">Back to top</a>
       </div>
 
-      <div class="gridCards">
+      <div class="gridCards collapsed" id="grid-games">
         <article class="card">
           <div class="shot" data-shot="bubble-pinch.png" data-cap="Bubble Pinch">
             <img src="bubble-pinch.png" alt="Bubble Pinch screenshot" />
@@ -705,6 +721,10 @@
           </div>
         </article>
       </div>
+
+      <div class="moreRow">
+        <button class="btn small" type="button" data-toggle="grid-games" data-i18n="more">More</button>
+      </div>
     </section>
 
     <section class="glass section" id="experiments">
@@ -716,7 +736,7 @@
         <a class="topLink" href="#top" data-i18n="backTop">Back to top</a>
       </div>
 
-      <div class="gridCards">
+      <div class="gridCards collapsed" id="grid-experiments">
         <article class="card">
           <div class="shot" data-shot="exp-handtracking.png" data-cap="Hand Tracking">
             <img src="exp-handtracking.png" alt="Hand Tracking screenshot" />
@@ -767,6 +787,10 @@
             </div>
           </div>
         </article>
+      </div>
+
+      <div class="moreRow">
+        <button class="btn small" type="button" data-toggle="grid-experiments" data-i18n="more">More</button>
       </div>
     </section>
 
@@ -900,7 +924,10 @@
         expMoreTop: "More prototypes will be added here.",
         ctaCardTop: "Have an idea? Let’s build a working MVP.",
         ctaCardTitle: "Build your next MVP",
-        ctaCardDesc: "Send a short brief and I reply with a simple build plan."
+        ctaCardDesc: "Send a short brief and I reply with a simple build plan.",
+
+        more: "More",
+        less: "Less"
       },
 
       kr: {
@@ -997,7 +1024,10 @@
         expMoreTop: "추가 실험을 여기에 계속 올립니다.",
         ctaCardTop: "아이디어가 있나요? 동작하는 MVP를 같이 만듭니다.",
         ctaCardTitle: "다음 MVP를 같이 만듭니다",
-        ctaCardDesc: "간단한 브리프만 보내주면 빌드 플랜으로 답합니다."
+        ctaCardDesc: "간단한 브리프만 보내주면 빌드 플랜으로 답합니다.",
+
+        more: "더보기",
+        less: "접기"
       }
     };
 
@@ -1020,11 +1050,9 @@
         btnEn.classList.remove("active");
         document.documentElement.lang = "ko";
       }
-    }
 
-    document.getElementById("btn-en").addEventListener("click", ()=>setLang("en"));
-    document.getElementById("btn-kr").addEventListener("click", ()=>setLang("kr"));
-    setLang("en");
+      syncMoreButtons(lang);
+    }
 
     const lightbox = document.getElementById("lightbox");
     const lightImg = document.getElementById("lightImg");
@@ -1043,23 +1071,64 @@
       lightImg.src = "";
     }
 
-    const shots = document.querySelectorAll(".shot");
-    shots.forEach(el=>{
-      const img = el.querySelector("img");
-      if(!img) return;
+    function wireShots(){
+      const shots = document.querySelectorAll(".shot");
+      shots.forEach(el=>{
+        const img = el.querySelector("img");
+        if(!img) return;
 
-      img.addEventListener("error", ()=>{
-        el.classList.add("noimg");
-      });
+        img.addEventListener("error", ()=>{
+          el.classList.add("noimg");
+        });
 
-      el.addEventListener("click", ()=>{
-        const src = el.getAttribute("data-shot");
-        if(!src) return;
-        if(el.classList.contains("noimg")) return;
-        const cap = el.getAttribute("data-cap") || "Preview";
-        openLightbox(src, cap);
+        el.addEventListener("click", ()=>{
+          const src = el.getAttribute("data-shot");
+          if(!src) return;
+          if(el.classList.contains("noimg")) return;
+          const cap = el.getAttribute("data-cap") || "Preview";
+          openLightbox(src, cap);
+        });
       });
-    });
+    }
+
+    function setMoreButtonText(btn, expanded, lang){
+      const kMore = (dict[lang] && dict[lang].more) ? dict[lang].more : "More";
+      const kLess = (dict[lang] && dict[lang].less) ? dict[lang].less : "Less";
+      btn.textContent = expanded ? kLess : kMore;
+    }
+
+    function wireMoreButtons(){
+      document.querySelectorAll("[data-toggle]").forEach(btn=>{
+        btn.addEventListener("click", ()=>{
+          const id = btn.getAttribute("data-toggle");
+          const grid = document.getElementById(id);
+          if(!grid) return;
+
+          const expanded = !grid.classList.contains("collapsed");
+          if(expanded){
+            grid.classList.add("collapsed");
+            setMoreButtonText(btn, false, document.documentElement.lang === "ko" ? "kr" : "en");
+            grid.scrollIntoView({behavior:"smooth", block:"start"});
+          } else {
+            grid.classList.remove("collapsed");
+            setMoreButtonText(btn, true, document.documentElement.lang === "ko" ? "kr" : "en");
+          }
+        });
+      });
+    }
+
+    function syncMoreButtons(lang){
+      document.querySelectorAll("[data-toggle]").forEach(btn=>{
+        const id = btn.getAttribute("data-toggle");
+        const grid = document.getElementById(id);
+        if(!grid) return;
+        const expanded = !grid.classList.contains("collapsed");
+        setMoreButtonText(btn, expanded, lang);
+      });
+    }
+
+    document.getElementById("btn-en").addEventListener("click", ()=>setLang("en"));
+    document.getElementById("btn-kr").addEventListener("click", ()=>setLang("kr"));
 
     lightClose.addEventListener("click", closeLightbox);
     lightbox.addEventListener("click", (e)=>{
@@ -1068,6 +1137,10 @@
     document.addEventListener("keydown", (e)=>{
       if(e.key === "Escape") closeLightbox();
     });
+
+    wireShots();
+    wireMoreButtons();
+    setLang("en");
   </script>
 </body>
 </html>
